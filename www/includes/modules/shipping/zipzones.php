@@ -1,0 +1,233 @@
+<?php
+  class zipzones {
+    var $code, $title, $description, $enabled, $icon, $is_avia;
+
+// class constructor
+    function zipzones() {
+	  global $order;
+
+      $this->code = 'zipzones';
+      $this->title = MODULE_SHIPPING_ZIPZONES_TEXT_TITLE;
+      $this->description = MODULE_SHIPPING_ZIPZONES_TEXT_DESCRIPTION;
+      $this->sort_order = MODULE_SHIPPING_ZIPZONES_SORT_ORDER;
+      $this->icon = '';
+      $this->tax_class = 0;
+      $this->enabled = ((MODULE_SHIPPING_ZIPZONES_STATUS == 'True') ? true : false);
+	  $this->is_avia = false;
+
+	  if ($order->content_type == 'virtual') $this->enabled = false;
+
+	  if ($this->enabled && (int)MODULE_SHIPPING_ZIPZONES_ZONE_1 > 0) {
+		$geozones_check_query = tep_db_query("select count(*) as total from " . TABLE_CITIES_TO_GEO_ZONES . " where geo_zone_id = '" . MODULE_SHIPPING_ZIPZONES_ZONE_1 . "' and city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+		$geozones_check = tep_db_fetch_array($geozones_check_query);
+		if ((int)$geozones_check['total'] > 0) $this->enabled = false;
+	  }
+	  if ($this->enabled && (int)MODULE_SHIPPING_ZIPZONES_ZONE_2 > 0) {
+		$geozones_check_query = tep_db_query("select count(*) as total from " . TABLE_CITIES_TO_GEO_ZONES . " where geo_zone_id = '" . MODULE_SHIPPING_ZIPZONES_ZONE_2 . "' and city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+		$geozones_check = tep_db_fetch_array($geozones_check_query);
+		if ((int)$geozones_check['total'] > 0) $this->enabled = false;
+	  }
+	  if ($this->enabled && (int)MODULE_SHIPPING_ZIPZONES_ZONE_3 > 0) {
+		$geozones_check_query = tep_db_query("select count(*) as total from " . TABLE_CITIES_TO_GEO_ZONES . " where geo_zone_id = '" . MODULE_SHIPPING_ZIPZONES_ZONE_3 . "' and city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+		$geozones_check = tep_db_fetch_array($geozones_check_query);
+		if ((int)$geozones_check['total'] > 0) $this->enabled = false;
+	  }
+	  if ($this->enabled && (int)MODULE_SHIPPING_ZIPZONES_ZONE_4 > 0) {
+		$geozones_check_query = tep_db_query("select count(*) as total from " . TABLE_CITIES_TO_GEO_ZONES . " where geo_zone_id = '" . MODULE_SHIPPING_ZIPZONES_ZONE_4 . "' and city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+		$geozones_check = tep_db_fetch_array($geozones_check_query);
+		if ((int)$geozones_check['total'] > 0) $this->enabled = false;
+	  }
+
+	  if (defined('MODULE_SHIPPING_ZIPZONES_AVIA_ZONES') && tep_not_null(MODULE_SHIPPING_ZIPZONES_AVIA_ZONES)) {
+		$avia_zones = array_map('trim', explode(',', MODULE_SHIPPING_ZIPZONES_AVIA_ZONES));
+		if (in_array($order->delivery['zone_id'], $avia_zones)) $this->is_avia = true;
+	  }
+
+	  if (ALLOW_SHOW_RECEIVE_IN=='true' && $this->enabled) {
+		$city_delivery_days_info_query = tep_db_query("select city_delivery_days from " . TABLE_CITIES . " where city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+		if (tep_db_num_rows($city_delivery_days_info_query) > 0) {
+		  $city_delivery_days_info = tep_db_fetch_array($city_delivery_days_info_query);
+		  $order->info['city_delivery_days'] = (int)$city_delivery_days_info['city_delivery_days'];
+		}
+	  }
+    }
+
+// class methods
+    function quote($method = '') {
+      global $order, $shipping_weight, $currencies, $currency;
+	  
+	  include(__DIR__.'/RussianPost.class.php');
+	  $RussianPost = new RussianPost;
+	  
+	  $postcode_check_query = tep_db_query("select count(*) as total from " . TABLE_CITIES . " where city_id = '" . tep_db_input($order->delivery['postcode']) . "'");
+	  $postcode_check = tep_db_fetch_array($postcode_check_query);
+	  $shipping_1 = 0;
+	  $shipping_2 = 0;
+	  $default_shipping_cost = str_replace(',', '.', MODULE_SHIPPING_ZIPZONES_COST);
+	  $additional_shipping_cost = str_replace(',', '.', MODULE_SHIPPING_ZIPZONES_ADDITIONAL_COST);
+
+	  $shipping_weight = 0;
+	  $total_weight = 0;
+	  $common_qty = 0;
+	  $periodicals_qty = 0;
+	  $periodicals_array = array();
+	  $total_sum = 0;
+	  if (is_object($order)) {
+		reset($order->products);
+		while (list(, $order_product) = each($order->products)) {
+		  if ($order_product['periodicity'] > 0) {
+			$periodicals_qty += $order_product['qty'];
+			$periodicals_weights[] = $order_product['weight'];
+			if (!in_array($order_product['id'], array_keys($periodicals_array))) {
+			  $periodicals_array[$order_product['id']] = array('weight' => $order_product['weight'],
+															   'price' => round($order_product['final_price'], $currencies->get_decimal_places($currency)),
+															   'qty' => $order_product['qty'],
+															   );
+			} else {
+			  $periodicals_array[$order_product['id']]['qty'] += $order_product['qty'];
+			}
+		  } else {
+			$common_qty += $order_product['qty'];
+			$total_weight += $order_product['weight']*$order_product['qty'];
+			$total_sum += $order_product['final_price'] * $order_product['qty'];
+		  }
+		  $shipping_weight += $order_product['weight']*$order_product['qty'];
+		}
+	  }
+	  $total_sum = round($total_sum, $currencies->get_decimal_places($currency));
+
+	  if ($shipping_weight == 0) {
+		$this->quotes['error'] = MODULE_SHIPPING_ZIPZONES_UNDEFINED_RATE;
+	  } elseif (empty($order->delivery['postcode']) || $postcode_check['total'] < 1) {
+		$this->quotes['error'] = MODULE_SHIPPING_ZIPZONES_NO_ZIPCODE_FOUND;
+	  } else {
+		if ($common_qty > 0) {
+		  /*$link = 'http://www.russianpost.ru/autotarif/Autotarif.aspx?countryCode=643&typePost=1' . 
+		  ($total_weight>2 ? '
+		  &viewPost=36
+		  &viewPostName=%D0%A6%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BE%D1%81%D1%8B%D0%BB%D0%BA%D0%B0' : '
+		  &viewPost=26
+		  &viewPostName=%D0%A6%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%B0%D0%BD%D0%B4%D0%B5%D1%80%D0%BE%D0%BB%D1%8C') . '
+		  &countryCodeName=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F
+		  &typePostName=%D0%9D%D0%90%D0%97%D0%95%D0%9C%D0%9D.
+		  &weight=' . ($total_weight*1000) . '
+		  &value1=' . $total_sum . '
+		  &postOfficeId=' . $order->delivery['postcode'];
+		  $page_content = '';
+		  if ($fp = @fopen($link, 'r')) {
+			stream_set_timeout($fp, 3);
+			while (!feof($fp)) {
+			  $page_content .= fgets($fp, 1024);
+			}
+			fclose($fp);
+		  }*/
+		  $PostPrice = $RussianPost->getPrice($order->delivery['postcode'], $total_weight*1000, $total_sum);
+		  //print_r('$PostPrice = '.$PostPrice);
+		  if ($PostPrice!=0) {
+			$shipping_1 = $PostPrice;//$PostPrice['Price'];
+			$shipping_method = sprintf(MODULE_SHIPPING_ZIPZONES_TEXT_WEIGHT, $total_weight);
+		  } elseif ($default_shipping_cost > 0) {
+			$shipping_1 = $default_shipping_cost * $total_weight;
+    		  if ($shipping_1 > 0) {
+    			$shipping_1 += $additional_shipping_cost;
+    		  }
+
+			$shipping_method = sprintf(MODULE_SHIPPING_ZIPZONES_TEXT_WEIGHT, $total_weight);
+		  } else {
+			$this->quotes['error'] = MODULE_SHIPPING_ZIPZONES_NO_ZIPCODE_FOUND;
+		  }
+		  if (MODULE_SHIPPING_ZIPZONES_FREE > 0 && $this->is_avia == false && $shipping_1 <= 250) {
+			$this->icon = ' (<span class="errorText">' . sprintf(MODULE_SHIPPING_ZIPZONES_TEXT_FREE_SHIPPING, $currencies->format(MODULE_SHIPPING_ZIPZONES_FREE)) . '</span>)';
+			if ($total_sum > MODULE_SHIPPING_ZIPZONES_FREE) $shipping_1 = 0;
+		  }
+		}
+
+		if ($periodicals_qty > 0) {
+		  reset($periodicals_array);
+		  while (list(, $periodicals_row) = each($periodicals_array)) {
+			$shipping_2_temp = 0;
+			if ($periodicals_row['weight'] > 0) {
+			  /*$link = 'http://www.russianpost.ru/autotarif/Autotarif.aspx?countryCode=643&typePost=1' 
+			  . ($periodicals_row['weight']>2 ? 
+			  '&viewPost=36
+			  &viewPostName=%D0%A6%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BE%D1%81%D1%8B%D0%BB%D0%BA%D0%B0' : '
+			  &viewPost=26
+			  &viewPostName=%D0%A6%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%B0%D0%BD%D0%B4%D0%B5%D1%80%D0%BE%D0%BB%D1%8C') . '
+			  &countryCodeName=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F
+			  &typePostName=%D0%9D%D0%90%D0%97%D0%95%D0%9C%D0%9D.
+			  &weight=' . ($periodicals_row['weight']*1000) . '
+			  &value1=' . $periodicals_row['price'] . '
+			  &postOfficeId=' . $order->delivery['postcode'];
+			  $page_content = '';
+			  if ($fp = @fopen($link, 'r')) {
+				stream_set_timeout($fp, 3);
+				while (!feof($fp)) {
+				  $page_content .= fgets($fp, 1024);
+				}
+				fclose($fp);
+			  }*/
+			  $PostPrice = $RussianPost->getPrice($order->delivery['postcode'], $periodicals_row['weight']*1000, $periodicals_row['price']);
+			  if ($PostPrice!=0) {
+				$shipping_2_temp += round($PostPrice, $currencies->get_decimal_places($currency)) + $additional_shipping_cost;
+				if (empty($shipping_method)) $shipping_method = sprintf(MODULE_SHIPPING_ZIPZONES_TEXT_WEIGHT_1, $periodicals_qty);
+			  } elseif ($default_shipping_cost > 0) {
+				$shipping_2_temp += $default_shipping_cost * $periodicals_row['weight'] + $additional_shipping_cost;
+			  } else {
+				$this->quotes['error'] = MODULE_SHIPPING_ZIPZONES_NO_ZIPCODE_FOUND;
+				break;
+			  }
+			}
+			$shipping_2 += $shipping_2_temp * $periodicals_row['qty'];
+		  }
+		}
+	  }
+	  $shipping_cost = str_replace(',', '.', round($shipping_1 + $shipping_2));
+
+	  if ($shipping_method=='') {
+		$this->quotes['error'] = MODULE_SHIPPING_ZIPZONES_UNDEFINED_RATE;
+//		$shipping_method = MODULE_SHIPPING_ZIPZONES_UNDEFINED_RATE;
+	  }
+
+      $this->quotes['id'] = $this->code;
+	  $this->quotes['module'] = MODULE_SHIPPING_ZIPZONES_TEXT_TITLE;
+	  $this->quotes['methods'] = array(array('id' => $this->code,
+											 'title' => $shipping_method,
+											 'cost' => $shipping_cost));
+
+	  if (tep_not_null($this->icon)) $this->quotes['icon'] = $this->icon;
+
+      return $this->quotes;
+    }
+
+    function check() {
+      if (!isset($this->_check)) {
+        $check_query = tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_ZIPZONES_STATUS'");
+        $this->_check = tep_db_num_rows($check_query);
+      }
+      return $this->_check;
+    }
+
+    function install() {
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('–азрешить этот способ доставки', 'MODULE_SHIPPING_ZIPZONES_STATUS', 'True', '¬ы хотите разрешить доставку этим способом?', '6', '10', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('1-€ зона невозможности доставки', 'MODULE_SHIPPING_ZIPZONES_ZONE_1', '', '”кажите 1-ю географическую зону, в которой <strong>не будет действовать</strong> данный вид доставки', '6', '20', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('2-€ зона невозможности доставки', 'MODULE_SHIPPING_ZIPZONES_ZONE_2', '', '”кажите 2-ю географическую зону, в которой <strong>не будет действовать</strong> данный вид доставки', '6', '30', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('3-€ зона невозможности доставки', 'MODULE_SHIPPING_ZIPZONES_ZONE_3', '', '”кажите 3-ю географическую зону, в которой <strong>не будет действовать</strong> данный вид доставки', '6', '40', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('4-€ зона невозможности доставки', 'MODULE_SHIPPING_ZIPZONES_ZONE_4', '', '”кажите 4-ю географическую зону, в которой <strong>не будет действовать</strong> данный вид доставки', '6', '50', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes(', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('«оны авиадоставки', 'MODULE_SHIPPING_ZIPZONES_AVIA_ZONES', '', 'ѕеречислите через зап€тую ID зон, доставка в которые осуществл€етс€ только авиатранспортом', '6', '60', 'tep_cfg_get_zone_name', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('—тоимость доставки', 'MODULE_SHIPPING_ZIPZONES_COST', '0', '—тоимость доставки (за кг) при невозможности ее вычислени€ в автоматическом режиме', '6', '70', 'currencies->format', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('—тоимость упаковки', 'MODULE_SHIPPING_ZIPZONES_ADDITIONAL_COST', '0', 'ƒобавл€ть указанную сумму за обработку/упаковку к стоимости доставки', '6', '80', 'currencies->format', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, date_added) values ('Ѕесплатна€ доставка', 'MODULE_SHIPPING_ZIPZONES_FREE', '0', '”кажите сумму заказа, при которой доставка будет бесплатной', '6', '90', 'currencies->format', now())");
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('ѕор€док вывода', 'MODULE_SHIPPING_ZIPZONES_SORT_ORDER', '0', 'ѕор€док вывода доставки на сайте.', '6', '100', now())");
+    }
+
+    function remove() {
+      tep_db_query("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+    }
+
+    function keys() {
+      $keys = array('MODULE_SHIPPING_ZIPZONES_STATUS', 'MODULE_SHIPPING_ZIPZONES_ZONE_1', 'MODULE_SHIPPING_ZIPZONES_ZONE_2', 'MODULE_SHIPPING_ZIPZONES_ZONE_3', 'MODULE_SHIPPING_ZIPZONES_ZONE_4', 'MODULE_SHIPPING_ZIPZONES_AVIA_ZONES', 'MODULE_SHIPPING_ZIPZONES_COST', 'MODULE_SHIPPING_ZIPZONES_ADDITIONAL_COST', 'MODULE_SHIPPING_ZIPZONES_FREE', 'MODULE_SHIPPING_ZIPZONES_SORT_ORDER');
+
+      return $keys;
+    }
+  }
+?>

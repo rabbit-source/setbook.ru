@@ -1,0 +1,736 @@
+html{
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#C9BD9B;
+color:#000000;
+font-family:Verdana,Geneva,sans-serif;
+font-size:11px;
+margin:0;
+padding:0;
+text-align:center;
+}
+body {
+background:#860A01 url(../images/page_t_l.gif) no-repeat scroll 0 0;
+margin:1em auto;
+text-align:left;
+width:991px;
+}
+
+h2{
+color:#8F0E01;
+font-size:1.4em;
+font-weight:normal;
+}
+
+img.cimg {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+max-width:161px;
+padding:12px;
+}
+img.one_image {
+border: 1px solid black;
+float:right;
+margin:3px 0 10px 10px;
+}
+td {
+font-family:Arial,Tahoma,Verdana;
+font-size:11px;
+}
+.messageBox {
+font-size:12px;
+margin-bottom:1.5em;
+background: url(../images/box_info_t.gif) no-repeat scroll 0 0;
+overflow:hidden;
+}
+.messageStackError, .messageStackWarning {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+color:#333333;
+overflow:hidden;
+padding:0 10px 2px;
+margin-top:3px;
+background:#D9CEB0 url(../images/box_info_b.gif) no-repeat scroll 0 100%;
+
+}
+.messageStackSuccess {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+color:#333333;
+padding:2px 10px;
+}
+.messageBox a:hover {
+color:#fff;
+}
+input, select, textarea, button {
+font-family:Tahoma,Arial,Verdana;
+font-size:11px;
+margin-left:0;
+}
+a:link {
+color:#8F0E01;
+text-decoration:underline;
+}
+a:visited {
+color:#643F26;
+}
+a:hover {
+color:#fff;
+background:#860A01;
+text-decoration:none;
+
+}
+form {
+display:inline;
+}
+.clear:after {
+clear:both;
+content:".";
+display:block;
+height:0;
+visibility:hidden;
+}
+.clear {
+display:inline-block;
+}
+* html .clear {
+height:1%;
+}
+.clear {
+display:block;
+}
+#page {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+padding:5px 0 0;
+text-align:left;
+width:991px;
+background: url(../images/page_t_r.gif) no-repeat scroll 100% 0;
+}
+#header {
+background:#22140A;
+height:117px;
+}
+#header_links {
+color:#E8DDBB;
+float:right;
+font-size:11px;
+line-height:11px;
+text-align:right;
+width:900px;
+display:none;
+}
+#header_links h1, #header_links h2 {
+display:inline;
+font-weight:normal;
+margin:0;
+padding:0 7px 0 0;
+font-size:1em;
+color:#E8DDBB;
+}
+#header_links p {
+display:inline;
+font-weight:normal;
+margin:0;
+padding:0;
+}
+#header_links p a:link, #header_links p a:visited, #header_links p a:hover {
+color:#fff;
+padding:0 7px 0 4px;
+text-decoration:none;
+border-right:1px solid #fff;
+}
+#header_links p a:hover {
+text-decoration:underline;
+background:none;
+}
+#header_links p a.last {
+border:medium none;
+}
+#logo {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:transparent url(../images/logo.gif) no-repeat scroll left top;
+float:left;
+
+}
+#logo a:link, #logo a:visited, #logo a:hover {
+display:block;
+height:84px;
+width:220px;
+background:none;
+}
+*html #logo a{ background:transparent url(../images/logo.gif) no-repeat scroll left top}
+#phone {
+color:#E8DDBB;
+text-align:right;
+float:right;
+font-size:1.8em;
+background:url(../images/tel_ico.gif) no-repeat scroll 0 50%;
+padding:.5em .5em .5em 1.5em;
+}
+#phone .number {
+color:#E8DDBB;
+font-family:Verdana,Geneva,sans-serif;
+
+}
+.skiptranslate{ float:right; background:#860A01 url(../images/search_menu_bg.gif) no-repeat scroll 0 100%; padding:.5em 1em; color:#fff!important;}
+.skiptranslate a{color:#fff!important;}
+
+#mainmenu {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#860A01;
+height:33px;
+clear:both;
+}
+#mainmenu ul {
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0;
+padding:0;
+}
+#mainmenu ul li {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+color:#FFFFFF;
+display:block;
+float:left;
+font-size:12px;
+font-weight:normal;
+line-height:33px;
+padding:0 17px 0 15px;
+background:transparent url(../images/site_m_sep.gif) no-repeat scroll 100% 50%;
+}
+#mainmenu ul li.last {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:none;
+}
+#mainmenu ul li a{
+color:#FFFFFF;
+text-decoration:none;
+display:block;
+padding:0 1em;
+}
+#mainmenu ul li a:visited{color:#E7DCBA;}
+#mainmenu ul li a:hover, #mainmenu ul li a:active, #mainmenu ul li a:focus{ color:#000000; background:#E8DDBB;}
+
+#search {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+padding:9px 6px;
+background:#860A01;
+}
+#s-field {
+color:#747474;
+float:left;
+font-size:11px;
+margin:0;
+padding:3px 0 4px;
+width:140px !important;
+border:1px solid #502D03;
+background:#D1C4A2;
+}
+#s-field:hover{background:#fff;}
+#s-input {
+padding-left:3px;
+}
+#s-div {
+font-size:10px;
+color:#E7DCBA;
+}
+#s-div span {
+cursor:pointer;
+text-decoration:underline;
+}
+#s-div span:hover{text-decoration:none;}
+#kbrd {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+display:none;
+padding:3px;
+position:absolute;
+}
+#kbrd span {
+cursor:pointer;
+display:block;
+font-size:10px;
+padding:0 1px 3px 0;
+text-align:right;
+text-decoration:underline;
+}
+#english {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+padding:5px 0px;
+background:#860A01;
+}
+#shopping_cart {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+line-height:1.4em;
+margin-top:0!important;
+margin-bottom:5px;
+border-bottom:1px solid #C9BC9A;
+
+}
+#shopping_cart, #account{background:#D9CEB0 url(../images/left_col_l.gif) no-repeat scroll 100% 0;}
+#shopping_cart .inner, #account .inner {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+padding:10px 10px 10px 45px;
+background:url(../images/cart.gif) no-repeat scroll 0 0;
+}
+#account .inner {background:url(../images/account.gif) no-repeat scroll 0 0;}
+#shopping_cart .cart_title {
+font-weight:bold;
+}
+
+#shopping_cart .contents a:link, #shopping_cart .contents a:visited {
+text-decoration:none;
+}
+#shopping_cart .contents a:hover {
+text-decoration:underline;
+}
+#shopping_cart .contents span {
+color:#FF6700;
+font-weight:bold;
+}
+#shopping_cart .checkout {
+}
+#shopping_cart .contents .checkout a:link, #shopping_cart .contents .checkout a:visited, #shopping_cart .contents .checkout a:hover {
+text-decoration:underline;
+}
+#account {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+line-height:1.4em;
+margin-bottom:5px;
+border-bottom:1px solid #C9BC9A;
+}
+#account .account_title {
+font-weight:bold;
+}
+#account .register {
+padding-top:1em;
+}
+#breadcrumb {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+font-size:12px;
+font-weight:bold;
+margin-bottom:1em;
+}
+#breadcrumb span {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+display:block;
+line-height:1.5em;
+}
+#breadcrumb a:link, #breadcrumb a:visited {
+color:#000000;
+text-decoration:underline;
+}
+#breadcrumb a:hover {
+color:#fff;
+text-decoration:none;
+}
+#breadcrumb h1 {
+  padding: 0px;
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline;
+}
+#mainpart {
+padding:13px 5px;
+background:#E8DDBB none repeat scroll 0 0;
+}
+#maincontent {
+display:block;
+float:right;
+width:772px;
+}
+#content {
+display:block;
+float:left;
+width:563px;
+}
+#leftcolumn {
+width:200px;
+}
+#rightcolumn {
+display:block;
+float:right;
+width:200px;
+}
+#footer {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+text-align:left;
+background:#31200E url(../images/footer_bg.gif) no-repeat scroll 99% 0;
+padding:1.5em 0 .3em;
+}
+#main_page_banner {
+margin-bottom:1em;
+}
+#column_right_banner {
+margin-bottom:5px;
+}
+.contentblock {
+margin:0;
+}
+.contentblock .contentheader, .contentblock .contentheader_1 {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+font-size:12px;
+font-weight:bold;
+margin-bottom:1em;
+background:transparent url(../images/bg_dotted.gif) repeat-x scroll left bottom;
+}
+.contentblock .contentheader h1, .contentblock .contentheader h2, .contentblock .contentheader h3, .contentblock .contentheader h4, .contentblock .contentheader h5, .contentblock .contentheader h6, .contentblock .contentheader_1 h3 {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+display:block;
+margin:0;
+padding:10px 0;
+background:transparent url(../images/bg_dotted.gif) repeat-x scroll 0 0;
+}
+
+.contentblock .contentbody .description {
+font-size:12px;
+line-height:1.4em;
+}
+.page_description {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+display:block;
+font-size:11px;
+line-height:1.4em;
+margin-bottom:1em;
+padding:5px 26px;
+}
+.contentblock .contentfooter {
+padding:0 1.5em 0 2.5em;
+}
+.contentblock .contentfooter span {
+display:block;
+line-height:2em;
+text-align:right;
+}
+.columnblock{
+margin-top:15px;
+background:#D9CEB0 url(../images/left_col_l.gif) no-repeat scroll 0 0;
+}
+.columnblock .contentheader {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+color:#000000;
+display:block;
+font-size:12px;
+font-weight:bold;
+line-height:17px;
+padding:13px 10px 11px 13px;
+background:url(../images/left_col_r.gif) no-repeat scroll 100% 0;
+}
+.columnblock .contentheader h1, .columnblock .contentheader h2, .columnblock .contentheader h3, .columnblock .contentheader h4, .columnblock .contentheader h5, .columnblock .contentheader h6, .columnblock .contentheader span {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+color:#8F0E01;
+margin:0;
+}
+.contentheader h1{ font-size:1.6em; font-weight:normal;}
+.columnblock .contentheader h2 a:hover {	color:#fff;}
+
+.columnblock .contentbody .description {
+}
+.columnblock .contentbody ul {
+margin:0;
+padding:0;
+}
+.columnblock .contentbody ul li {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+line-height:1.3em;
+list-style-position:outside;
+list-style-type:none;
+
+}
+*html .columnblock .contentbody ul li {height:1%;}
+.columnblock .contentbody ul li.last a, .columnblock .contentbody ul li.last a:hover{
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+}
+.columnblock .contentbody ul li a{
+border-bottom:1px solid #C9BC9A;
+font-family:verdana;
+color:#201209;
+font-size:1.1em;
+padding:0.6em 1.11em 0.6em 2em;
+display:block;
+line-height:1em;
+text-decoration:none;
+background: url(../images/li.gif) no-repeat scroll 1.1em 1em;
+}
+.columnblock .contentbody ul li a:hover{border-bottom:1px solid #850A00; color:#850A00;}
+.columnblock .contentbody ul li a:active, .columnblock .contentbody ul li a:focus, .columnblock .contentbody ul li a.active{background:#850A00!important; color:#fff;}
+.columnblock .contentbody ul ul.level_1 li a{background:none; border:none;padding:0.3em 1.11em 0.3em 2.5em; border-bottom:1px solid #d9ceb0;}
+.columnblock .contentbody ul ul.level_1 li a:hover, .columnblock .contentbody ul ul.level_1 li a:active, .columnblock .contentbody ul ul.level_1 li a:focus{background:#850A00; color:#fff;}
+
+.columnblock .contentbody .description {
+color:#000000;
+line-height:1.2em;
+}
+.columnblock .contentfooter {
+}
+#cards {
+float:left;
+padding:16px 12px 16px 12px;
+color:#D9CEB0;
+font-weight:normal;
+border-right:1px solid #22130A;;
+}
+#footernav {
+line-height:1.5em;
+padding-top:15px;
+text-align:left;
+color:#F6F4EE;
+}
+#footernav a:link, #footernav a:visited, #footernav a:hover {
+color:#F6F4EE;
+font-weight:normal;
+padding:0 10px;
+text-decoration:none;
+}
+#footernav a:hover {
+text-decoration:underline;
+background:none;
+}
+#copyright {
+color:#E8DDBB;
+margin-left:240px;
+padding-top:5px;
+}
+#copyright a:link, #copyright a:visited, #copyright a:hover {
+color:#E8DDBB;
+text-decoration:none;
+}
+#copyright a:hover {
+text-decoration:underline;
+}
+#counters {
+margin-bottom:0;
+margin-top:0;
+text-align:center;
+}
+
+
+/**
+ * This <div> element is wrapped by jCarousel around the list
+ * and has the classname "jcarousel-container".
+ */
+.jcarousel-container {
+  position: relative;
+}
+
+.jcarousel-clip {
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.jcarousel-list {
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.jcarousel-list li,
+.jcarousel-item {
+  float: left;
+  list-style: none;
+  /* We set the width/height explicitly. No width/height causes infinite loops. */
+  width: 118px;
+  height: 100%;
+}
+
+.jcarousel-list .row_product_carousel {
+  text-align: left;
+}
+
+.jcarousel-list .row_product_img {
+  text-align: center;
+}
+
+.jcarousel-list img {
+  border: 1px solid black;
+  width: 80px;
+}
+
+.jcarousel-list .row_product_top {
+  margin-bottom: 15px;
+  line-height: 1.1em;
+  font-size: 11px;
+}
+
+.jcarousel-list .row_product_name {
+  text-align: center;
+  margin-bottom: 7px;
+  line-height: 1.1em;
+  font-size: 11px;
+}
+
+.jcarousel-list .row_product_author {
+  text-align: center;
+  line-height: 1.1em;
+  font-size: 10px;
+  float: none;
+}
+
+.jcarousel-list .row_product_price {
+  float: none;
+  font-size: 12px;
+  margin: 0px auto;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  bottom: 0px;
+  width: 116px;
+}
+
+.row_product_carousel .row_product_price {
+  position: absolute;
+}
+
+/**
+ * The buttons are added dynamically by jCarousel before
+ * the <ul> list (inside the <div> described above) and
+ * have the classnames "jcarousel-next" and "jcarousel-prev".
+ */
+.jcarousel-next {
+  z-index: 3;
+  display: none;
+}
+
+.jcarousel-prev {
+  z-index: 3;
+  display: none;
+}
+
+.jcarousel-skin-tango .jcarousel-container {
+  overflow: hidden;
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+  height: auto;
+  margin: 0 30px 0 30px;
+  width: 502px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+  margin-right: 10px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+  background: #fff;
+  color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+  position: absolute;
+  top: 26px;
+  right: 5px;
+  width: 15px;
+  height: 70px;
+  cursor: pointer;
+  background: transparent url(../images/next_horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover {
+  background-position: -15px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:active {
+  background-position: -30px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+  cursor: default;
+  background-position: -45px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+  position: absolute;
+  top: 26px;
+  left: 5px !important;
+  left: -25px;
+  width: 15px;
+  height: 70px;
+  cursor: pointer;
+  background: transparent url(../images/prev_horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover {
+  background-position: -15px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:active {
+  background-position: -30px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+  cursor: default;
+  background-position: -45px 0;
+}

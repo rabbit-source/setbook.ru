@@ -1,0 +1,6 @@
+RewriteEngine Off
+
+<Files ~ ".*\.ph[a-z0-9]{1,3}$">
+ Order Deny,Allow
+ Deny from all
+</Files>

@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} \.(gif|jpg|jpeg|png)$ 
+RewriteRule .* /includes/templates/images/nofoto_big.gif [L]

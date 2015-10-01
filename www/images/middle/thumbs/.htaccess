@@ -1,0 +1,2 @@
+RewriteEngine Off
+RewriteRule ^(.+\.[a-z]{3,4})$ ../../../show_image.php?image=middle/thumbs/$1

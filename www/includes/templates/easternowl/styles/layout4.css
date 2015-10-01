@@ -1,0 +1,30 @@
+@media screen {
+
+body {
+  background-image: none;
+}
+
+#page {
+  min-width: 200px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+#content {
+  margin: 10px;
+  min-height: auto;
+  height: auto;
+}
+
+#content .contentblock {
+
+}
+
+#popup_footer {
+  text-align: center;
+  font-size: 10px;
+  padding-top: 1em;
+}
+
+}

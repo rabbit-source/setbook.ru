@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<Styles>
+	<Style name="Выделить жирным" element="span">
+		<Attribute name="style" value="font-weight: bold;" />
+	</Style>
+	<Style name="Выделить курсивом" element="em" />
+	<Style name="Title" element="span">
+		<Attribute name="class" value="Title" />
+	</Style>
+	<Style name="Элемент типа code" element="span">
+		<Attribute name="class" value="Code" />
+	</Style>
+	<Style name="Заголовок H3" element="h3" />
+	<Style name="Custom Ruler" element="hr">
+		<Attribute name="size" value="1" />
+		<Attribute name="color" value="#ff0000" />
+	</Style>
+</Styles>

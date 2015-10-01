@@ -1,0 +1,10 @@
+RewriteEngine Off
+AuthType Basic
+AuthName BackSite
+AuthUserFile /var/www/2009/admin/access/.htpasswd_ru
+
+php_value max_execution_time 48000
+
+<Limit GET POST>
+  require valid-user
+</Limit>

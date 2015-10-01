@@ -1,0 +1,907 @@
+@media screen {
+
+body {
+  padding: 0;
+  margin: 0px;
+  font-family: Arial, Tahoma, Verdana;
+  font-size: 11px;
+  background: #FFFFFF url(../images/bg_main.gif) top left repeat-x;
+  color: #000000;
+  text-align: center;
+}
+
+img.cimg {
+  padding: 12px;
+  max-width: 161px;
+  background: url(../images/bg_image.gif) top left no-repeat;
+}
+
+img.one_image {
+  border: 1px solid black;
+  float: right;
+  margin: 3px 0 10px 10px;
+}
+
+td {
+  font-family: Arial, Tahoma, Verdana;
+  font-size: 11px;
+}
+
+.messageBox {
+  font-size: 12px;
+  margin-bottom: 1.5em;
+}
+
+.messageStackError, .messageStackWarning {
+  background: #ffb3b5;
+  padding: 2px 10px;
+  border: 1px solid #D63C40;
+  color: #333333;
+}
+
+.messageStackSuccess {
+  background: #D1E7F3;
+  padding: 2px 10px;
+  border: 1px solid #cccccc;
+  color: #333333;
+}
+
+.messageBox a:hover {
+  color: #666666;
+}
+
+input, select, textarea, button {
+  font-size: 11px;
+  font-family: Tahoma, Arial, Verdana;
+}
+
+a:link {
+  text-decoration: underline;
+  color: #000000;
+}
+
+a:visited {
+  text-decoration: underline;
+  color: #000000; /*#898989;*/
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #FF6700;
+}
+
+form {
+  display: inline;
+}
+
+.clear:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clear {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .clear {height: 1%;}
+.clear {display: block;}
+/* End hide from IE-mac */
+
+#page {
+  width: 991px;
+  text-align: left;
+  margin: 5px auto 0 auto;
+  background: #FFFFFF;
+  padding: 5px 0;
+}
+
+#holiday {
+  display: none;
+}
+
+#header {
+  height: 117px;
+}
+
+#header_links {
+  float: right;
+  color: #000000;
+  width: 900px;
+  text-align: right;
+  line-height: 11px;
+  font-size: 11px;
+  height: 12px;
+}
+
+#header_links h1, #header_links h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  display: inline;
+  font-weight: normal;
+  padding-right: 3px;
+}
+
+#header_links p {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-weight: normal;
+}
+
+#header_links p a:link, #header_links p a:visited, #header_links p a:hover {
+  padding: 0 3px 0 5px;
+  color: #000000;
+  text-decoration: none;
+  border-left: 1px solid #000000;
+}
+
+#header_links p a:hover {
+  text-decoration: underline;
+}
+
+#header_links p a.last {
+  border: none;
+}
+
+#logo {
+  margin-bottom: 2px;
+  background: url(../images/logo.gif) top left no-repeat;
+}
+
+#logo a:link, #logo a:visited, #logo a:hover {
+  display: block;
+  width: 220px;
+  height: 65px;
+}
+
+#phone {
+  height: 18px;
+  color: #000000;
+  width: 214px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#skype_button {
+  float: left;
+  display: block;
+  margin-top: -3px;
+}
+
+#phone .number {
+  font-weight: bold;
+  color: #D84508;
+  font-size: 13px;
+}
+
+#header_banner {
+  position: absolute;
+  top: 32px;
+  float: right;
+  margin-left: 246px;
+}
+
+#mainmenu {
+  height: 33px;
+  background: #A5A53C url(../images/bg_header.gif) top left no-repeat;
+}
+
+#mainmenu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#mainmenu ul li {
+  font-size: 12px;
+  color: #FFFFFF;
+  line-height: 1.5em;
+  float: left;
+  display: block;
+  padding: 0 30px 0 29px;
+  background: url(../images/bg_header_menu.gif) top right no-repeat;
+  line-height: 33px;
+  font-weight: bold;
+  text-shadow: #83832D 1px 1px, #9E9F39 2px 2px;
+  filter: dropshadow(color=#83832D, offx=1, offy=1, positive=1);
+}
+
+#mainmenu ul li.last {
+  background: none;
+}
+
+#mainmenu ul li a:link, #mainmenu ul li a:visited, #mainmenu ul li a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#search {
+  background: url(../images/bg_column_1.gif) top left no-repeat;
+  border-bottom: 1px solid #DCD9D9;
+  padding: 9px 6px;
+  margin-bottom: 5px;
+}
+
+#s-field {
+  border: 1px solid #CBC4BD;
+  width: 150px !important;
+  width: 147px;
+  font-size: 11px;
+  padding: 3px 0 4px 0;
+  margin: 0;
+  float: left;
+  color: #747474;
+}
+
+#s-input {
+  padding-left: 3px;
+}
+
+#s-div {
+  font-size: 10px;
+}
+
+#s-div span {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#kbrd {
+  position: absolute;
+  display: none;
+  background: #FFFFFF;
+  border: 1px solid #DCD9D9;
+  padding: 3px;
+}
+
+#kbrd span {
+  font-size: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+  text-align: right;
+  padding: 0 1px 3px 0;
+}
+
+#english {
+  background: url(../images/en_bg.jpg) top left no-repeat;
+  border-bottom: 1px solid #DCD9D9;
+  padding: 19px 0px 19px 50px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+#shopping_cart {
+  padding: 10px 10px 0px 10px;
+  background: url(../images/bg_column_1.gif) top left no-repeat;
+  border-bottom: 1px solid #DCD9D9;
+  line-height: 1.4em;
+  margin-bottom: 5px;
+}
+
+#shopping_cart .inner {
+  padding-left: 40px;
+  background: url(../images/cart.gif) top left no-repeat;
+}
+
+#shopping_cart .cart_title {
+  font-weight: bold;
+}
+
+#shopping_cart .contents {
+  padding-bottom: 1em;
+}
+
+#shopping_cart .contents a:link, #shopping_cart .contents a:visited {
+  text-decoration: none;
+}
+
+#shopping_cart .contents a:hover {
+  text-decoration: underline;
+}
+
+#shopping_cart .contents span {
+  font-weight: bold;
+  color: #FF6700;
+}
+
+#shopping_cart .checkout {
+}
+
+#shopping_cart .contents .checkout a:link, #shopping_cart .contents .checkout a:visited, #shopping_cart .contents .checkout a:hover {
+  text-decoration: underline;
+}
+
+#account, #network, #callback {
+  padding: 10px 10px 10px 10px;
+  background: url(../images/bg_column_1.gif) top left no-repeat;
+  border-bottom: 1px solid #DCD9D9;
+  line-height: 1.4em;
+  margin-bottom: 5px;
+}
+
+#account .inner {
+  padding-left: 40px;
+  background: url(../images/account.gif) top left no-repeat;
+}
+
+#network .inner {
+  padding-left: 40px;
+  background: url(../images/network.gif) top left no-repeat;
+}
+
+#callback .inner {
+  padding-left: 40px;
+  background: url(../images/callback.gif) top left no-repeat;
+}
+
+#account .account_title, #network .account_title, #callback .callback_title {
+  font-weight: bold;
+}
+
+#account .contents, #network .contents {
+}
+
+#account .contents a:link, #account .contents a:visited, #account .contents a:hover, #network .contents a:link, #network .contents a:visited, #network .contents a:hover, #callback .contents a:link, #callback .contents a:visited, #callback .contents a:hover {
+  text-decoration: underline;
+}
+
+#account .register, #network .register {
+  padding-top: 1em;
+}
+
+#breadcrumb {
+  font-size: 12px;
+  background: url(../images/bg_dotted.gif) top left repeat-x;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+#breadcrumb span {
+  display: block;
+  padding: 10px 25px;
+  background: url(../images/bg_dotted.gif) bottom left repeat-x;
+  line-height: 1.5em;
+}
+
+#breadcrumb a:link, #breadcrumb a:visited {
+  color: #000000;
+  text-decoration: underline;
+}
+
+#breadcrumb a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+#breadcrumb h1 {
+  padding: 0px;
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline;
+}
+
+#mainpart {
+  padding: 13px 5px;
+}
+
+#maincontent {
+  display: block;
+  width: 772px;
+  float: right;
+}
+
+#content {
+  display: block;
+  float: left;
+  width: 563px;
+}
+
+#leftcolumn {
+  width: 200px;
+}
+
+#rightcolumn {
+  width: 200px;
+  display: block;
+  float: right;
+}
+
+#footer {
+  background: #F6F6F6 url(../images/bg_footer.gif) top left no-repeat;
+  height: 81px;
+  text-align: left;
+  margin: 5px 6px 0px 5px;
+}
+
+#main_page_banner {
+  margin-bottom: 1em;
+}
+
+#column_right_banner {
+  margin-bottom: 5px;
+}
+
+/* -- Blocks -- */
+
+.contentblock {
+  margin: 0;
+}
+
+.contentblock .contentheader, .contentblock .contentheader_1 {
+  font-size: 12px;
+  background: url(../images/bg_dotted.gif) top left repeat-x;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.contentblock .contentheader h1, .contentblock .contentheader h2, .contentblock .contentheader h3, .contentblock .contentheader h4, .contentblock .contentheader h5, .contentblock .contentheader h6, .contentblock .contentheader_1 h3 {
+  display: block;
+  padding: 10px 25px;
+  background: url(../images/bg_dotted.gif) bottom left repeat-x;
+  line-height: 1.5em;
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.contentblock .contentheader a:link, .contentblock .contentheader a:visited {
+  color: #000000;
+}
+
+.contentblock .contentheader_1 a:link, .contentblock .contentheader_1 a:visited {
+  color: #000000;
+}
+
+.contentblock .contentbody {
+}
+
+.contentblock .contentbody .description {
+  line-height: 1.4em;
+  font-size: 12px;
+}
+
+.description h1, .description h2, .description h3, .description h4, .description h5, .description h6 {
+  font-size: 12px;
+}
+
+.page_description {
+  display: block;
+  background: #EEEEEE url(../images/bg_additional.gif) top left no-repeat;
+  font-size: 11px;
+  line-height: 1.4em;
+  padding: 5px 26px;
+  border-bottom: 1px solid #DCD9D9;
+  margin-bottom: 1em;
+}
+
+.contentblock .contentfooter {
+  padding: 0 1.5em 0 2.5em;
+}
+
+.contentblock .contentfooter span {
+  display: block;
+  line-height: 2em;
+  text-align: right;
+}
+
+.columnblock {
+  margin-top: 5px;
+}
+
+.columnblock .contentheader {
+  background: url(../images/bg_column_header_1.gif) top left no-repeat;
+  padding: 13px 10px 11px 13px;
+  display: block;
+  font-weight: bold;
+  color: #000000;
+  font-size: 12px;
+  line-height: 12px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.columnblock .contentheader h1, .columnblock .contentheader h2, .columnblock .contentheader h3, .columnblock .contentheader h4, .columnblock .contentheader h5, .columnblock .contentheader h6, .columnblock .contentheader span {
+  color: #000000;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 10px;
+  background: url(../images/bg_column_header_2.gif) center left no-repeat;
+}
+
+.columnblock .contentheader a:link, .columnblock .contentheader a:visited {
+  color: #000000;
+  text-decoration: none;
+}
+
+.columnblock .contentbody {
+  padding: 10px 7px 5px 10px;
+  border: 1px solid #E5E5E5;
+  border-top: 0px;
+}
+
+.columnblock .contentbody span {
+  margin: 0;
+  padding: 0;
+}
+
+.columnblock .row_product_price {
+  float: none;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.columnblock .row_product_name {
+  margin-top: 10px;
+}
+
+.columnblock a:link, .columnblock a:visited, .columnblock a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
+.columnblock a.active {
+  text-decoration: none;
+  color: #FF6700;
+}
+
+.columnblock a:hover {
+  text-decoration: none;
+  color: #FF6700;
+}
+
+.columnblock .contentbody div.li, .columnblock .contentbody div.li_first, .columnblock .contentbody div.li_special, .columnblock .contentbody div.li_first_special {
+  margin: 0;
+  padding: 0 0 0 0px;
+  background: url(../images/bg_dotted.gif) top left repeat-x;
+}
+
+.columnblock .contentbody div.li_special, .columnblock .contentbody div.li_first_special {
+  background-color: #F4F4F4;
+}
+
+.columnblock .contentbody div.li_first, .columnblock .contentbody div.li_first_special {
+  background: none;
+  margin-top: -5px;
+}
+
+.columnblock .contentbody div.level_0, .columnblock .contentbody div.level_1, .columnblock .contentbody div.level_2, .columnblock .contentbody div.level_3, .columnblock .contentbody div.level_4, .columnblock .contentbody div.level_5, .columnblock .contentbody div.level_6, .columnblock .contentbody div.level_7 {
+  background: url(../images/bg_list_1.gif) top left no-repeat;
+  line-height: 1.2em;
+  padding: 4px 10px 3px 10px;
+  margin: 0;
+}
+
+.columnblock .contentbody div.level_1 {
+  margin-left: 10px;
+}
+
+.columnblock .contentbody div.level_2 {
+  margin-left: 20px;
+}
+
+.columnblock .contentbody div.level_3 {
+  margin-left: 30px;
+}
+
+.columnblock .contentbody div.level_4 {
+  margin-left: 40px;
+}
+
+.columnblock .contentbody div.level_5 {
+  margin-left: 50px;
+}
+
+.columnblock .contentbody div.level_6 {
+  margin-left: 60px;
+}
+
+.columnblock .contentbody div.level_7 {
+  margin-left: 70px;
+}
+
+.columnblock .contentbody ul {
+  margin: 0 0 0 12px;
+  padding: 0;
+}
+
+.columnblock .contentbody ul li {
+  list-style: url(../images/bg_list.gif);
+  line-height: 1.3em;
+  padding: 2px 0 4px 0;
+  background: url(../images/bg_dotted.gif) bottom left repeat-x;
+}
+
+.columnblock .contentbody ul li.last {
+  background: none;
+}
+
+.columnblock .contentbody .description {
+  line-height: 1.2em;
+  color: #000000;
+}
+
+.columnblock .contentfooter {
+}
+
+#viewed_products .columnblock .contentbody {
+  padding: 0 1px 1px 10px;
+}
+
+#viewed_products .columnblock .contentbody ul {
+  padding-top: 10px;
+  padding-right: 7px;
+  padding-right: 5px;
+}
+
+#viewed_products {
+  scrollbar-3dlight-color: #FFFFFF;
+  scrollbar-arrow-color: #999999;
+  scrollbar-darkshadow-color: #E8E8E8;
+  scrollbar-base-color: #FFFFFF;
+  scrollbar-face-color: #E8E8E8;
+  scrollbar-highlight-color: #E8E8E8;
+  scrollbar-shadow-color: #E8E8E8;
+  scrollbar-track-color: #FFFFFF;
+}
+
+/* -- Footer -- */
+
+#cards {
+  float: left;
+  margin: 22px 0 0 12px;
+}
+
+#footernav {
+  text-align: left;
+  margin-left: 230px;
+  padding-top: 15px;
+  line-height: 1.5em;
+}
+
+#footernav a:link, #footernav a:visited, #footernav a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  font-weight: bold;
+  color: #454545;
+}
+
+#footernav a:hover {
+  text-decoration: underline;
+}
+
+#copyright {
+  margin-left: 240px;
+  line-height: 1.5em;
+  padding-top: 15px;
+  color: #8C8C8C;
+}
+
+#copyright a:link, #copyright a:visited, #copyright a:hover {
+  text-decoration: none;
+  color: #8C8C8C;
+}
+
+#copyright a:hover {
+  text-decoration: underline;
+}
+
+#counters {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/**
+ * This <div> element is wrapped by jCarousel around the list
+ * and has the classname "jcarousel-container".
+ */
+.jcarousel-container {
+  position: relative;
+}
+
+.jcarousel-clip {
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.jcarousel-list {
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.jcarousel-list li,
+.jcarousel-item {
+  float: left;
+  list-style: none;
+  /* We set the width/height explicitly. No width/height causes infinite loops. */
+  width: 118px;
+  height: 100%;
+}
+
+.jcarousel-list .row_product_carousel {
+  text-align: left;
+}
+
+.jcarousel-list .row_product_img {
+  text-align: center;
+}
+
+.jcarousel-list img {
+  border: 1px solid black;
+  width: 80px;
+}
+
+.jcarousel-list .row_product_top {
+  margin-bottom: 15px;
+  line-height: 1.1em;
+  font-size: 11px;
+}
+
+.jcarousel-list .row_product_name {
+  text-align: center;
+  margin-bottom: 7px;
+  line-height: 1.1em;
+  font-size: 11px;
+}
+
+.jcarousel-list .row_product_author {
+  text-align: center;
+  line-height: 1.1em;
+  font-size: 10px;
+  float: none;
+}
+
+.jcarousel-list .row_product_price {
+  float: none;
+  font-size: 12px;
+  margin: 0px auto;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  bottom: 0px;
+  width: 116px;
+}
+
+.row_product_carousel .row_product_price {
+  position: absolute;
+}
+
+/**
+ * The buttons are added dynamically by jCarousel before
+ * the <ul> list (inside the <div> described above) and
+ * have the classnames "jcarousel-next" and "jcarousel-prev".
+ */
+.jcarousel-next {
+  z-index: 3;
+  display: none;
+}
+
+.jcarousel-prev {
+  z-index: 3;
+  display: none;
+}
+
+.jcarousel-skin-tango .jcarousel-container {
+  overflow: hidden;
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+  height: auto;
+  margin: 0 30px 0 30px;
+  width: 502px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+  margin-right: 10px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+  background: #fff;
+  color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 24px;
+  height: 125px;
+  cursor: pointer;
+  background: transparent url(../images/next_horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover {
+  background-position: -24px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:active {
+  background-position: -48px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+  cursor: default;
+  background-position: -72px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+  position: absolute;
+  top: 5px;
+  left: 5px !important;
+  left: -25px;
+  width: 24px;
+  height: 125px;
+  cursor: pointer;
+  background: transparent url(../images/prev_horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover {
+  background-position: -24px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:active {
+  background-position: -48px 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+  cursor: default;
+  background-position: -72px 0;
+}
+
+
+}
+
+input#subscribe {
+	/*border:1px solid #D9D9D9;*/
+	width: 175px;
+}
+
+input#big_subscribe {
+	border:1px solid #D9D9D9;
+	width: 507px;
+	height: 30px;
+	font-size: 24px;
+	color: #7E7E7E;
+	font-weight: bold;
+}
+
+#subscribe_button {
+	margin-top: 12px;
+	margin-left: 25px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}

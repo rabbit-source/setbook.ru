@@ -1,0 +1,21 @@
+@media screen {
+
+#shortcuts {
+  width: 100%;
+  height: 59px;
+  background: url(../images/shortcutsbg.gif) top left repeat-x;
+}
+
+#content {
+  margin-right: 200px;
+  min-height: 500px;
+  height: auto !important;
+  height: 500px;
+}
+
+#rightcolumn {
+  width: 200px;
+  float: right;
+}
+
+}

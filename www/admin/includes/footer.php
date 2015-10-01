@@ -1,0 +1,1 @@
+<div id="footer"><?php echo ' &copy; 2005' . (date('Y')>2005 ? '-' . date('Y') : '') . ' <a href="http://sitebistro.ru/" target="_blank">SiteBistro.ru</a>'; ?></div>

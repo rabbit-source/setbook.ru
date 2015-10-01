@@ -1,0 +1,57 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^([^www\.])
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{HTTPS} on
+RewriteRule ^robots.txt$ robots_https.txt
+# RewriteCond %{REQUEST_URI} ^\/index\.php
+# RewriteRule ^(.*)$ / [R=301]
+
+RewriteRule ^knigoed(.*)$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(\.html|\.php|\.rss|\.txt|\.ico)$
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+RewriteRule ^([_a-z0-9\/]*[_a-z0-9]*)\.rss$ rss.php?rName=$1 [QSA]
+RewriteRule ^children_toys\/(.*)$ /for_children/$1 [R=301,L]
+RewriteRule ^books\/foreign\/(.*)\.html$ foreign.php?pName=$1 [QSA]
+RewriteRule ^books\/foreign([\/]*)$ foreign.php [QSA]
+RewriteRule ^books\/authors\/(.*)\.html$ authors.php?rName=$1 [QSA]
+RewriteRule ^books\/authors([\/]*)$ authors.php [QSA]
+RewriteRule ^books\/reviews\/(.*)$ reviews.php?tName=$1 [QSA]
+RewriteRule ^books\/specials\/(.*)$ specials.php?tName=$1 [QSA]
+RewriteRule ^books\/publishers\/(.*)\.html$ manufacturers.php?mName=$1 [QSA]
+RewriteRule ^books\/publishers([\/]*)$ manufacturers.php [QSA]
+RewriteRule ^boards\/(.*)$ boards.php?tName=$1 [QSA]
+RewriteRule ^new_year\/(.*)$ holiday.php?hName=$1 [QSA]
+RewriteRule ^([^\/]+)\/series\/(.*)\.html$ series.php?tName=$1&rName=$2 [QSA]
+RewriteRule ^([^\/]+)\/series([\/]*)$ series.php?tName=$1 [QSA]
+RewriteRule ^books\/([0-9]+)\.html$ product_info.php?tName=books&products_id=$1 [QSA]
+RewriteRule ^books\/([_a-z0-9\/]*)$ categories.php?tName=books&cName=$1 [QSA]
+RewriteRule ^periodicals\/([0-9]+)\.html$ product_info.php?tName=periodicals&products_id=$1 [QSA]
+RewriteRule ^periodicals\/([_a-z0-9\/]*)$ categories.php?tName=periodicals&cName=$1 [QSA]
+RewriteRule ^electronics\/([0-9]+)\.html$ product_info.php?tName=electronics&products_id=$1 [QSA]
+RewriteRule ^electronics\/([_a-z0-9\/]*)$ categories.php?tName=electronics&cName=$1 [QSA]
+RewriteRule ^for_children\/([0-9]+)\.html$ product_info.php?tName=for_children&products_id=$1 [QSA]
+RewriteRule ^for_children\/([_a-z0-9\/]*)$ categories.php?tName=for_children&cName=$1 [QSA]
+RewriteRule ^souvenirs\/([0-9]+)\.html$ product_info.php?tName=souvenirs&products_id=$1 [QSA]
+RewriteRule ^souvenirs\/([_a-z0-9\/]*)$ categories.php?tName=souvenirs&cName=$1 [QSA]
+RewriteRule ^dvd\/([0-9]+)\.html$ product_info.php?tName=dvd&products_id=$1 [QSA]
+RewriteRule ^dvd\/([_a-z0-9\/]*)$ categories.php?tName=dvd&cName=$1 [QSA]
+RewriteRule ^stationery\/([0-9]+)\.html$ product_info.php?tName=stationery&products_id=$1 [QSA]
+RewriteRule ^stationery\/([_a-z0-9\/]*)$ categories.php?tName=stationery&cName=$1 [QSA]
+RewriteRule ^audiobooks\/([0-9]+)\.html$ product_info.php?tName=audiobooks&products_id=$1 [QSA]
+RewriteRule ^audiobooks\/([_a-z0-9\/]*)$ categories.php?tName=audiobooks&cName=$1 [QSA]
+RewriteRule ^ebooks\/([0-9]+)\.html$ product_info.php?tName=ebooks&products_id=$1 [QSA]
+RewriteRule ^ebooks\/([_a-z0-9\/]*)$ categories.php?tName=ebooks&cName=$1 [QSA]
+RewriteRule ^posters\/([0-9]+)\.html$ product_info.php?tName=posters&products_id=$1 [QSA]
+RewriteRule ^posters\/([_a-z0-9\/]*)$ categories.php?tName=posters&cName=$1 [QSA]
+RewriteRule ^bijouterie\/([0-9]+)\.html$ product_info.php?tName=bijouterie&products_id=$1 [QSA]
+RewriteRule ^bijouterie\/([_a-z0-9\/]*)$ categories.php?tName=bijouterie&cName=$1 [QSA]
+RewriteRule ^news(.*)$ news.php?nName=$1 [QSA]
+RewriteRule ^([_a-z0-9\/]*[_a-z0-9]*\.*[html]*)$ index.php?sName=$1 [QSA]
+
+ErrorDocument 404 /404.php
+
+#php_value xdebug.remote_enable 1
+#php_value xdebug.remote_host 62.84.116.110

@@ -1,0 +1,188 @@
+<?php
+  header('Content-type: text/html; charset=windows-1251');
+
+// start the timer for the page parse time log
+  define('PAGE_PARSE_START_TIME', microtime());
+
+// set the level of error reporting
+  error_reporting(E_ALL & ~E_NOTICE);
+
+  if (isset($_SERVER)) {
+	$HTTP_GET_VARS = &$_GET;
+	$HTTP_POST_VARS = &$_POST;
+	$HTTP_POST_FILES = &$_FILES;
+	$HTTP_ENV_VARS = &$_ENV;
+	$HTTP_SERVER_VARS = &$_SERVER;
+	$HTTP_COOKIE_VARS = &$_COOKIE;
+	$HTTP_SESSION_VARS = &$_SESSION;
+	$PHP_SELF = $_SERVER['PHP_SELF'];
+  }
+
+// check if register_globals is enabled.
+// since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
+  if (function_exists('ini_get')) {
+    ini_get('register_globals') or die('НЕУСТРАНИМАЯ ОШИБКА: регистрация глобальных переменных в файле php.ini запрещена, пожалуйста, исправьте!');
+  }
+
+// include server parameters
+  require('includes/configure.php');
+//	if ($_SERVER['REMOTE_ADDR']=='94.199.108.66') echo getenv('HTTP_HOST');
+
+#  if (HTTP_SERVER!='http://www.setbook.ru') if ($_SERVER['REMOTE_ADDR']!='94.199.108.66') die('На сайте проводятся регламентные работы, зайдите, пожалуйста, через 10 минут / Site is closed for a few minutes.');
+
+  define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG . 'download/');
+  define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG . 'pub/');
+
+  define('DIR_WS_IMAGES', DIR_WS_CATALOG . 'images/');
+  define('DIR_WS_IMAGES_BIG', DIR_WS_IMAGES . 'big/');
+  define('DIR_WS_IMAGES_MIDDLE', DIR_WS_IMAGES . 'middle/');
+  define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
+  define('DIR_WS_INCLUDES', 'includes/');
+  define('DIR_WS_FUNCTIONS', DIR_WS_INCLUDES . 'functions/');
+  define('DIR_WS_CLASSES', DIR_WS_INCLUDES . 'classes/');
+  define('DIR_WS_MODULES', DIR_WS_INCLUDES . 'modules/');
+  define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES . 'languages/');
+
+  define('DIR_WS_BLOCKS', DIR_WS_INCLUDES . 'blocks/');
+  define('DIR_WS_JAVASCRIPT', DIR_WS_INCLUDES . 'javascript/');
+  define('DIR_WS_CONTENT', DIR_WS_INCLUDES . 'content/');
+
+  define('USE_PCONNECT', 'false'); // use persistent connections?
+  define('STORE_SESSIONS', ''); // leave empty '' for default handler or set to 'mysql'
+
+  if (strlen(DB_SERVER) < 1) {
+    if (is_dir('install')) {
+      header('location: install/index.php');
+    }
+  }
+
+// set the type of request (secure or not)
+  $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
+
+// include the list of project filenames
+  require(DIR_WS_INCLUDES . 'filenames.php');
+
+// include the list of project database tables
+  require(DIR_WS_INCLUDES . 'database_tables.php');
+
+// include the database functions
+  require(DIR_WS_FUNCTIONS . 'database.php');
+
+// make a connection to the database... now
+  @tep_db_connect() or die('Unable to connect to database server!');
+
+  preg_match("/^(\d+)\.(\d+)\.(\d+)/", mysql_get_server_info(), $m);
+  define('MYSQL_VERSION', sprintf("%d%02d%02d", $m[1], $m[2], $m[3]));
+  if (MYSQL_VERSION > 40101) {
+	tep_db_query("set character_set_client='cp1251'");
+	tep_db_query("set character_set_results='cp1251'");
+	tep_db_query("set collation_connection='cp1251_general_ci'");
+	tep_db_query("set names cp1251");
+  }
+
+  $shops_count = 0;
+  $available_shops_string = '';
+  $available_currencies = array();
+  $shops_query = tep_db_query("select * from " . TABLE_SHOPS . " where 1 order by sort_order, shops_url");
+  while ($shops = tep_db_fetch_array($shops_query)) {
+	if ($shops['shops_url']==HTTP_SERVER) {
+	  $available_currencies = explode(',', $shops['shops_currency']);
+	  $default_currency = $available_currencies[0];
+	  define('DEFAULT_CURRENCY', $default_currency);
+	  define('SHOP_ID', $shops['shops_id']);
+	  define('DOMAIN_ZONE', substr($shops['shops_url'], strrpos($shops['shops_url'], '.')+1));
+	  define('SHOP_PREFIX', $shops['shops_prefix']);
+	  define('SHOP_LISTING_STATUS', $shops['shops_listing_status']);
+	  define('STORE_DESCRIPTION', $shops['shops_description']);
+	  define('DIR_WS_TEMPLATES', DIR_WS_INCLUDES . 'templates/' . $shops['shops_templates_dir'] . '/');
+	  define('EMAIL_USE_HTML', ($shops['shops_email_use_html']=='1' ? 'true' : 'false'));
+
+	  tep_db_select_db($shops['shops_database']);
+
+	  $shop_ssl_status = 'off';
+	  if (!empty($shops['shops_ssl']) && $shops['shops_ssl']!=$shops['shops_url']) $shop_ssl_status = 'on';
+	  define('SHOP_SSL_STATUS', $shop_ssl_status);
+	}
+	if ($shops['shops_listing_status']=='1' && $shops['shops_url']!=HTTP_SERVER && $shops_count < 5) {
+	  $available_shops_string .= '<a href="' . $shops['shops_url'] . '">' . $shops['shops_name'] . '</a> ';
+	  $shops_count ++;
+	}
+  }
+  if (SHOP_LISTING_STATUS=='0') $available_shops_string = '';
+
+  define('AVAILABLE_SHOPS_LINKS', trim($available_shops_string));
+
+  define('DIR_WS_TEMPLATES_BOXES', DIR_WS_TEMPLATES . 'boxes/');
+  define('DIR_WS_TEMPLATES_IMAGES', DIR_WS_CATALOG . DIR_WS_TEMPLATES . 'images/');
+  define('DIR_WS_TEMPLATES_STYLES', DIR_WS_CATALOG . DIR_WS_TEMPLATES . 'styles/');
+
+// set the application parameters
+  $configuration_query = tep_db_query("select configuration_key, configuration_value from configuration");
+  while ($configuration = tep_db_fetch_array($configuration_query)) {
+	define($configuration['configuration_key'], $configuration['configuration_value']);
+  }
+
+  if (preg_match_all('/([^dar]win[dows]*)[\s]?([0-9a-z]*)[\w\s]?([a-z0-9.]*)/i', $_SERVER['SERVER_SOFTWARE'], $match) || preg_match('/(68[k0]{1,3})|(ppc mac os x)|([p\S]{1,5}pc)|(darwin)/i', $_SERVER['SERVER_SOFTWARE'], $match)) {
+	define('EMAIL_TRANSPORT', 'smtp');
+	define('EMAIL_LINEFEED', "\r\n");
+  } else {
+	define('EMAIL_TRANSPORT', 'sendmail');
+	define('EMAIL_LINEFEED', "\n");
+  }
+
+  define('BASE_HREF', (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG);
+
+  define('SESSION_BLOCK_SPIDERS', 'True');
+  define('EMAIL_FROM', STORE_NAME . ' <' . STORE_OWNER_EMAIL_ADDRESS . '>');
+
+  if (!empty($_SERVER['REQUEST_URI'])) $self_page = $_SERVER['REQUEST_URI'];
+  else $self_page = $_SERVER['PHP_SELF'] . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+  define('REQUEST_URI', $self_page);
+  if (strpos($self_page, '?')!==FALSE) $self_page = substr($self_page, 0, strpos($self_page, '?'));
+  define('PHP_SELF', $self_page);
+  define('SCRIPT_FILENAME', $_SERVER['SCRIPT_NAME']);
+
+  $current_page_address = (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . PHP_SELF;
+  define('CURRENT_PAGE_ADDRESS', $current_page_address);
+
+// define general functions used application-wide
+  require(DIR_WS_FUNCTIONS . 'general.php');
+  require(DIR_WS_FUNCTIONS . 'html_output.php');
+
+// set the cookie domain
+  $cookie_domain = HTTP_COOKIE_DOMAIN;
+  $cookie_path = HTTP_COOKIE_PATH;
+
+// include shopping cart class
+  require(DIR_WS_CLASSES . 'shopping_cart.php');
+
+// include navigation history class
+  require(DIR_WS_CLASSES . 'navigation_history.php');
+
+// some code to solve compatibility issues
+  require(DIR_WS_FUNCTIONS . 'compatibility.php');
+
+// check if sessions are supported, otherwise use the php3 compatible session class
+  if (!function_exists('session_start')) {
+    define('PHP_SESSION_NAME', 'PHPSESSID');
+    define('PHP_SESSION_PATH', $cookie_path);
+    define('PHP_SESSION_DOMAIN', $cookie_domain);
+    define('PHP_SESSION_SAVE_PATH', SESSION_WRITE_DIRECTORY);
+
+    include(DIR_WS_CLASSES . 'sessions.php');
+  }
+
+// define how the session functions will be used
+  require(DIR_WS_FUNCTIONS . 'sessions.php');
+
+// set the session name and save path
+  tep_session_name('PHPSESSID');
+  tep_session_save_path(SESSION_WRITE_DIRECTORY);
+
+// set the session cookie parameters
+   if (function_exists('session_set_cookie_params')) {
+    session_set_cookie_params(0, $cookie_path, $cookie_domain);
+  } elseif (function_exists('ini_set')) {
+    ini_set('session.cookie_lifetime', '0');
+    ini_set('session.cookie_path', $cookie_path);
+    ini_set('sessi

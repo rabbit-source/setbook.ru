@@ -1,0 +1,1 @@
+<br /><br /></font></td></tr></table></td></tr><tr><td colspan="2" height="32" align="right" background="<?php echo HTTP_SERVER . '/images/mail/'; ?>bg_bottom.gif"><font face="Tahoma" size="2">&copy; 2010 <a href="<?php echo HTTP_SERVER; ?>"><?php echo STORE_NAME; ?></a>&nbsp;&nbsp;&nbsp;</font></td></tr></table></body></html>
